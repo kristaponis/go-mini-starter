@@ -1,0 +1,24 @@
+{{define "navbar"}}
+
+<nav class="navbar">
+    <div class="navbar-block">
+        <a class="navbar-btn" href="/">Home</a>
+        <a class="navbar-btn" href="/contacts">Contacts</a>
+    </div>
+    <div class="navbar-block">
+    {{if .User}}
+        <a class="navbar-btn" href="/user/dashboard">Dashboard</a>
+        <div>
+            <form action="/user/logout" method="post">
+                {{csrfField}}
+                <button class="navbar-btn" type="submit">Logout</button>
+            </form>
+        </div>
+    {{else}}
+        <a class="navbar-btn" href="/user/signup">Signup</a>
+        <a class="navbar-btn" href="/user/login">Login</a>
+    {{end}}
+    </div>
+</nav>
+
+{{end}}

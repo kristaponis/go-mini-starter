@@ -1,0 +1,14 @@
+{{define "yield"}}
+
+<div class="dashboard">
+    <p class="dashboard-text">Welcome to your dashboard, <b>{{.User.Name}}</b></p>
+
+    <div class="dashboard-delete">
+        <form action="/user/delete" method="post">
+            {{csrfField}}
+            <button class="delete-acc-btn" type="submit">Delete my account</button>
+        </form>
+    </div>
+</div>
+
+{{end}}
