@@ -88,7 +88,4 @@
 
 ![signup page request-response](/create-user.png "Signup page Request-Response")
 
-## License
-
-MIT license
-
+@kristaponis
