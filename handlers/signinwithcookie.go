@@ -36,6 +36,7 @@ func SignInWithCookie(w http.ResponseWriter, user *models.User, key bson.D) erro
 	cookie := http.Cookie{
 		Name:     "remember_token",
 		Value:    user.Remember,
+		Path:	  "/",
 		HttpOnly: true, // JavaScript can't access cookie.
 	}
 	http.SetCookie(w, &cookie)
