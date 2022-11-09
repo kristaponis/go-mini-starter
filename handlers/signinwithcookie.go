@@ -12,7 +12,7 @@ import (
 // SignInWithCookie sets a session cookie for the user.
 func SignInWithCookie(w http.ResponseWriter, user *models.User, key bson.D) error {
 	// If user.Remember is empty string, create new remember token,
-	// then hash the remember token.
+	// then hash remember token.
 	if user.Remember == "" {
 		token, err := helpers.RememberToken(64)
 		if err != nil {
@@ -36,7 +36,7 @@ func SignInWithCookie(w http.ResponseWriter, user *models.User, key bson.D) erro
 	cookie := http.Cookie{
 		Name:     "remember_token",
 		Value:    user.Remember,
-		Path:	  "/",
+		Path:     "/",
 		HttpOnly: true, // JavaScript can't access cookie.
 	}
 	http.SetCookie(w, &cookie)

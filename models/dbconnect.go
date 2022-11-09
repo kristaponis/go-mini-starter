@@ -11,7 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// Connect to MongoDB.
+// ConnectToDB used to connect MongoDB.
 func ConnectToDB() *mongo.Client {
 	// Construct MongoDB connection URI.
 	mongoURI := fmt.Sprintf("%s://%s:%s", os.Getenv("DB_DRIVER"), os.Getenv("DB_HOST"), os.Getenv("DB_PORT"))

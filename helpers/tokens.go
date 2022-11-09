@@ -18,7 +18,7 @@ func RandomBytes(n int) ([]byte, error) {
 }
 
 // RememberToken returns random string, randomized with provided
-// int as number of bytes. Recomendation is from 32 bytes.
+// int as number of bytes. Recommendation is from 32 bytes.
 func RememberToken(n int) (string, error) {
 	b, err := RandomBytes(n)
 	if err != nil {

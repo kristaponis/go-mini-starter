@@ -28,15 +28,15 @@ func NewUserHandler() *UserHandler {
 	}
 }
 
-// CreateForm renders a page with a sign up form to create a new user.
+// SignupUserForm renders a page with a signup form to create a new user.
 // It also adds CSRF token to the form.
 // GET /signup
 func (uh *UserHandler) SignupUserForm(w http.ResponseWriter, r *http.Request) {
 	uh.SignupView.Render(w, r, "base", nil)
 }
 
-// CreateUser processes the form when the new user creates account.
-// It parses the sign up form data, creates user in the database and
+// SignupUser processes the form when the new user creates account.
+// It parses the signup form data, creates user in the database and
 // after successful creation, signs in the user to dashboard.
 // POST /signup
 func (uh *UserHandler) SignupUser(w http.ResponseWriter, r *http.Request) {
@@ -59,7 +59,7 @@ func (uh *UserHandler) SignupUser(w http.ResponseWriter, r *http.Request) {
 
 	// Create new user. If there is an error(s), set alert message
 	// and render sign up form again. err is of helpers.UserError type. For data
-	// persistance of the form, address of the &usr is passed in the Data field of
+	// persistence of the form, address of the &usr is passed in the Data field of
 	// views.SetViewData, not ViewUser field. If there is an error,
 	// form data (name and email) will remain after rendering signup form again.
 	if err := models.NewUser().Create(&user); err != nil {
@@ -72,7 +72,7 @@ func (uh *UserHandler) SignupUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Sign in user with cookie and set the remember token.
+	// Sign in user with cookie and set remember token.
 	key := bson.D{{Key: "email", Value: user.Email}}
 	if err := SignInWithCookie(w, &user, key); err != nil {
 		http.Redirect(w, r, "/login", http.StatusFound)
@@ -83,14 +83,14 @@ func (uh *UserHandler) SignupUser(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/user/dashboard", http.StatusFound)
 }
 
-// LoginForm renders a page with a form to login existing user.
+// LoginUserForm renders a page with a form to login existing user.
 // GET /login
 func (uh *UserHandler) LoginUserForm(w http.ResponseWriter, r *http.Request) {
 	uh.LoginView.Render(w, r, "base", nil)
 }
 
 // LoginUser parses the login form data, verifies the email and password
-// if the they are correct, and signs in the user to dashboard.
+// if they are correct, and signs in the user to dashboard.
 // POST /login
 func (uh *UserHandler) LoginUser(w http.ResponseWriter, r *http.Request) {
 	// Parse form data from the request. If there is an error, set error message
@@ -116,7 +116,7 @@ func (uh *UserHandler) LoginUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Sign in user with cookie and set the remember token. If there is an error,
+	// Sign in user with cookie and set remember token. If there is an error,
 	// set error message and render login form again.
 	key := bson.D{{Key: "email", Value: user.Email}}
 	if err := SignInWithCookie(w, user, key); err != nil {
@@ -181,7 +181,7 @@ func (*UserHandler) DeleteUser(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
-// UserDashboard gets user from the context and pass it to
+// DashboardUser gets user from the context and pass it to
 // template as viewData. This is user only protected page.
 func (uh *UserHandler) DashboardUser(w http.ResponseWriter, r *http.Request) {
 	user := contexts.GetUser(r.Context())

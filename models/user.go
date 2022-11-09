@@ -31,13 +31,13 @@ func NewUser() *User {
 	return &User{}
 }
 
-// Create will validate user name, email and password. Then hash user password
+// Create will validate username, email and password. Then hash user password
 // and create the user in the database.
 func (*User) Create(user *User) error {
-	// Normalize user name, email and password. Order: name, email, password.
+	// Normalize username, email and password. Order: name, email, password.
 	user.Name, user.Email, user.Password = helpers.NormalizeUserCreate(user.Name, user.Email, user.Password)
 
-	// Validate user name, email and password.
+	// Validate username, email and password.
 	if err := helpers.ValidateUserCreate(user.Name, user.Email, user.Password); err != nil {
 		return err
 	}
@@ -174,7 +174,7 @@ func (*User) Delete(e string) error {
 	return nil
 }
 
-// AuthenticateUser checks if email and password are correct at login.
+// Authenticate checks if email and password are correct at login.
 // If correct - it returns user, if not - it returns an error.
 func (u *User) Authenticate(e string, p string) (*User, error) {
 	// Normalize user email and password.

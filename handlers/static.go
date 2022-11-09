@@ -21,7 +21,7 @@ func NewStaticHandler() *StaticHandler {
 	}
 }
 
-// Home is main root page. It checks if the user is set,
+// HomePage is main root page. It checks if the user is set,
 // if it is, passes the user data to template. If the user is not set,
 // it passes nil for the user and serves the page.
 func (sh *StaticHandler) HomePage() http.HandlerFunc {
@@ -33,7 +33,7 @@ func (sh *StaticHandler) HomePage() http.HandlerFunc {
 	}
 }
 
-// Contacts serves static /contacts page. It checks if the user is set,
+// ContactsPage serves static /contacts page. It checks if the user is set,
 // if it is, passes the user data to template. If the user is not set,
 // it passes nil for the user and serves the page.
 func (sh *StaticHandler) ContactsPage(w http.ResponseWriter, r *http.Request) {
