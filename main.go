@@ -21,12 +21,12 @@ func main() {
 	CSRF := csrf.Protect([]byte(os.Getenv("CSRF_KEY")), csrf.Secure(false))
 
 	// Add all routes.
-	router := router()
+	r := router()
 
 	// Configure the server.
 	server := &http.Server{
 		Addr:           ":" + os.Getenv("PORT"),
-		Handler:        CSRF(router),
+		Handler:        CSRF(r),
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20, // 1 MB
@@ -34,7 +34,7 @@ func main() {
 
 	// Start the server.
 	log.Printf("starting server at port %s ...", os.Getenv("PORT"))
-	if err := server.ListenAndServe(); err != nil {
+	if err = server.ListenAndServe(); err != nil {
 		log.Fatal("error running server:", err)
 	}
 }
