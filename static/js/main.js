@@ -1,7 +1,7 @@
 // toggleAlert() hides error message in the /signup or /login form.
 // These errors come from the server side validation.
 function toggleAlert() {
-    var toggleEl = document.getElementById("alertId")
+    let toggleEl = document.getElementById("alertId")
     toggleEl.style.display = "none"
 }
 
